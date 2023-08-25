@@ -3,12 +3,22 @@
       {
         "src": "PaymentApp/wsgi.py",
         "use": "@vercel/python"
+      },
+      {
+        "src":"build_files.sh",
+        "dest":"@vercel/static-build",
+        "config": {
+          "distDir":"staticfiles_build"
+        }
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
         "dest": "PaymentApp/wsgi.py"
+      },{
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
       }
     ]
   }
