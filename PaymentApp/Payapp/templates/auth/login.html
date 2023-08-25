@@ -1,13 +1,24 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Login</h1>
-<h2><strong>{{mesage}}</strong></h2>
-<form method="post">
-    {% csrf_token %}
-    <label>Username: </label>
-    <input type="text" placeholder="Enter Username" name="username" required></input>
-    <label>Password: </label>
-    <input type="password" placeholder="Enter Password" name="password" required></input>
-    <button type="submit">Submit</button>
-</form>
-{% endblock content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Login{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    </head>
+<body>
+    <main>
+        <div class="container">
+            <h1>Log In</h1><br>
+            <form method="post">
+                {% csrf_token %}
+                <label for="">Username</label>
+                <input type="email" placeholder="Enter Email">
+                <label for="">Password</label>
+                <input type="password" placeholder="Enter Password">
+                <a href="" class="login">Create account</a>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

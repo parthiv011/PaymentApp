@@ -1,23 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>{% block title %}{% endblock title %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
     </head>
     <body>
-        <h1>Base Page</h1>
-        <a href="{% url 'signup' %}">Sign Up</a>
-        {% if request.user.is_authenticated %}
-            <a href="/logout/">Log Out</a>
-            {% else %}
-            <a href="/login/">Log In</a>
-        {% endif %}
-        <h2>{{request.user.first_name}}</h2>
-        {% block content %}
-        {% endblock content %}
+        <nav>
+            <h1>PaymentApp</h1>
+            <ul>
+                <li><a href="{% url 'signup' %}">Sign In</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a class="login" href="/logout/">Log Out</a></li>
+                    {% else %}
+                    <li><a class="login" href="/login/">Log In</a></li>
+                    {% endif %}
+            </ul>
+        </nav>
+        <div class="main-content">
+        {% block content %}{% endblock content %}
+        </div>
     </body>
 </html>

@@ -1,22 +1,30 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Sign Up</h1>
-<form method="post">
-    {% csrf_token %}
-    <label>First Name: </label>
-    <input type="text" placeholder="Enter Username" name="first_name" required></input>
-
-    <label>Last Name: </label>
-    <input type="text" placeholder="Enter Username" name="last_name"></input>
-
-    <label>Username: </label>
-    <input type="text" placeholder="Enter Username" name="username" required></input>
-
-    <label>Password: </label>
-    <input type="password" placeholder="Enter Password" name="password" required></input>
-
-    <label>Confirm Password: </label>
-    <input type="text" placeholder="Confirm Password" name="cpassword" required></input>
-    <button type="submit">Submit</button>
-</form>
-{% endblock content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Sign Up{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+    </head>
+    <body>
+        <main>
+            <div class="container">
+                <h1>Sign Up</h1><br>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="">First Name</label>
+                    <input type="text" placeholder="Enter First Name" name="first_name" required>
+                    <label for="">Last Name</label>
+                    <input type="text" placeholder="Enter Last Name" name="last_name">
+                    <label for="">Username</label>
+                    <input type="email" placeholder="Enter Email" name="username" required>
+                    <label for="">Password</label>
+                    <input type="password" placeholder="Enter Password" name="password" required>
+                    <label for="">Confirm Password</label>
+                    <input type="password" placeholder="Confirm Password" name="cpassword" required>
+                    <a href="" class="login">Already have account?</a>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
