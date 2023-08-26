@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    padding: 1.5%;
+    background-color: rgba(198, 223, 230,0.5);
+    position: fixed;
+    width: 100%;
+    height: auto;
+}
+ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.8em;
+}
+a{
+    color: white;
+}
+.login{
+    background-color: #218DAA;
+    color: white;
+    padding: 8px;
+    border-radius: 6px;
+}
