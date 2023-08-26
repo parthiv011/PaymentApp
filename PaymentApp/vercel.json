@@ -1,6 +1,6 @@
 {
   "builds": [{
-      "src": "project_name/wsgi.py",
+      "src": "PaymentApp/wsgi.py",
       "use": "@vercel/python"
   },
   {
@@ -15,7 +15,7 @@
       },
       {
           "src": "/(.*)",
-          "dest": "project_name/wsgi.py"
+          "dest": "PaymentApp/wsgi.py"
       }
   ]
 }
