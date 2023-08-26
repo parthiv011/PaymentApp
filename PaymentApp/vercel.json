@@ -1,24 +1,21 @@
 {
-  "builds": [
-    {
-      "src": "PaymentApp/wsgi.py",
+  "builds": [{
+      "src": "project_name/wsgi.py",
       "use": "@vercel/python"
-    },
-    {
+  },
+  {
       "src": "build_files.sh",
-      "config": {
-        "distDir": "staticfiles_build"
-      }
-    }
-  ],
+      "use": "@vercel/static-build",
+      "config": { "distDir": "staticfiles_build" }
+  }],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "PaymentApp/wsgi.py"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    }
+      {
+          "src": "/static/(.*)",
+          "dest": "/static/$1"
+      },
+      {
+          "src": "/(.*)",
+          "dest": "project_name/wsgi.py"
+      }
   ]
 }
