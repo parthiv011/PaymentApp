@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
-const  dotenv = require('dotenv');
+const dotenv = require('dotenv')
 dotenv.config();
 
-const mongoUrl = process.env.MONGODB;
+const MongoUrl = process.env.MONGODB_URL;
 
-const mongoConnect = async () => {
-    try{
-        await mongoose.connect(mongoUrl);
-        console.log("DB Connected!");
-    }catch (e) {
-        console.log("Internal Database Error!");
+const connectMongoDB = async () => {
+    try {
+        await mongoose.connect(MongoUrl);
+        console.log("Database connected!");
+    } catch (e){
+        console.error("Internal Database Error");
     }
 }
 
-mongoConnect();
+connectMongoDB();
 
-module.exports = { mongoConnect };
+module.exports = { connectMongoDB };
