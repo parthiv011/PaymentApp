@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {signUpSchema, logInSchema, updateUserSchema} = require("./validators");
-const {User} = require("../models/models");
+const {User, Account} = require("../models/models");
 const {secret} = require("../config");
 const signUp = async (req, res) => {
     try{
@@ -30,6 +30,12 @@ const signUp = async (req, res) => {
         })
 
         const userId = user._id;
+
+        // Initializing the user Account
+        await Account.create({
+            userId,
+            balance: 1000 + Math.random() * 10000
+        });
 
         const token = jwt.sign({
             userId
