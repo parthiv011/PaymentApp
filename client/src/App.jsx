@@ -2,16 +2,21 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {Signup} from "./pages/Signup.jsx";
 import {Login} from "./pages/Login.jsx";
 import {Dashboard} from "./pages/Dashboard.jsx";
+import {Navbar} from "./components/Navbar.jsx";
+import {Home} from "./pages/Home.jsx";
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
+        <BrowserRouter>
+          <Navbar />
           <Routes>
-              <Route path={'/signup'} element={<Signup />}></Route>
-              <Route path={'/login'} element={<Login />}></Route>
-              <Route path={'/dashboard'} element={<Dashboard />}></Route>
+              <Route path={'/'} element={<Home />} />
+              <Route path={'/home'} element={<Home />} />
+              <Route path={'/signup'} element={<Signup />} />
+              <Route path={'/login'} element={<Login />} />
+              <Route path={'/dashboard'} element={<Dashboard />} />
           </Routes>
       </BrowserRouter>
     </>

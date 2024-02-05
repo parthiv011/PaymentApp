@@ -1,3 +1,5 @@
 export const Dashboard = () => {
-    return <div>Hello from dashboard!</div>
+    return <main>
+
+    </main>
 }
