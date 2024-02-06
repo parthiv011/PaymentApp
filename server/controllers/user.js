@@ -124,7 +124,13 @@ const searchUser = async (req, res) => {
                 lastName: {
                     "$regex": filter
                 }
-            }]
+            },
+            {
+                username: {
+                    "$regex": filter
+                }
+            }
+        ]
     });
 
     res.json({

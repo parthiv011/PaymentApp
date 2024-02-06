@@ -4,7 +4,7 @@ export const Input = ({label, placeholder, type, onChange}) => {
             {label}
         </div>
         <input
-            className="w-full px-2 py-1 border rounded border-gray-200"
+            className="w-full px-2 py-1 border rounded border-gray-200 focus:outline-none"
             type={type}
             onChange={onChange}
             placeholder={placeholder}
