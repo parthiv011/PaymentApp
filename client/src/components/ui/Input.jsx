@@ -1,4 +1,4 @@
-export const Input = ({label, placeholder, type, onChange}) => {
+export const Input = ({label, placeholder, type,min, onChange}) => {
     return <div>
         <div className="text-sm font-medium text-left py-2">
             {label}
@@ -8,6 +8,7 @@ export const Input = ({label, placeholder, type, onChange}) => {
             type={type}
             onChange={onChange}
             placeholder={placeholder}
+            min={min}
         />
     </div>
 }

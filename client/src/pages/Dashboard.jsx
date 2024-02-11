@@ -10,23 +10,30 @@ export const Dashboard = () => {
 
     useEffect(() => {
         const fetchData = async ()  => {
-            const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`)
-                    setUser(response.data.user);
+            try {
+                const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
+                const userData = setUser(response.data.user);
+                // const name = userData.firstName;
+
+            }catch (e) {
+                console.error("Error Fetching the Data!", e);
+            }
         }
         fetchData();
     }, [filter])
-    return <main className='mt-24'>
+    return <main className='mt-24 px-3'>
         <h1
             className='font-bold'
-        >Welcome {token}!</h1>
+        >Welcome </h1>
         <Input label={"Search User"} type={"text"} placeholder={"Enter user for transaction"} onChange={(e) => {
             setFilter(e.target.value);
         }} />
 
-        <div>
-            {users.map(user => {
-                <Users user={user} />
-            })}
+        <div className='gap-3 flex'>
+            {users.map(user => (
+                <Users key={user._id} user={user} />
+            ))}
+
         </div>
     </main>
 }

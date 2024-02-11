@@ -1,16 +1,18 @@
+import {Button} from "./ui/Button.jsx";
+import {useNavigate} from "react-router-dom";
+import {ProfileCard} from "./ProfileCard.jsx";
+
 export const Users = ({user}) => {
-    return <div className="flex justify-between">
-        <div className="flex">
-            <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
-                <div className="flex flex-col justify-center h-full text-xl">
-                    {user.firstName[0]}
-                </div>
-            </div>
-            <div className="flex flex-col justify-center h-ful">
-                <div>
-                    {user.firstName} {user.lastName}
-                </div>
-            </div>
+
+    const navigate = useNavigate();
+
+    return <div className="flex flex-col justify-between border p-2 mt-2 rounded-xl w-1/4">
+        <ProfileCard profileImage={user.firstName[0]} firstName={user.firstName} lastName={user.lastName} />
+        <div className='flex gap-3 mt-4'>
+            <Button title={"Request"} />
+            <Button title={"Pay"} onClick={() => {
+                navigate('/transfer');
+            }}/>
         </div>
     </div>
 }

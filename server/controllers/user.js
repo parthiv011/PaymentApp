@@ -89,6 +89,28 @@ const logIn = async (req, res) => {
     }
 }
 
+const showUserData = async (req, res) => {
+    try {
+        const userData = await User.findOne({username: req.headers.username});
+        if(userData){
+            res.json({
+                userId: userData._id,
+                username: userData.username,
+                firstName: userData.firstName,
+                lastName: userData.lastName
+            });
+        }
+        else {
+            res.json("User not found !")
+        }
+    }catch (e) {
+        console.log(e);
+        res.status(500).json({
+            msg: "Internal server Error!"
+        })
+    }
+}
+
 const updateUser = async (req, res) => {
     const { success } = updateUserSchema.safeParse(req.body);
     if(!success) {
@@ -117,17 +139,20 @@ const searchUser = async (req, res) => {
     const users = await User.find({
         $or: [{
             firstName: {
-                "$regex": filter
+                "$regex": filter,
+                "$options": "i"
             }
         },
             {
                 lastName: {
-                    "$regex": filter
+                    "$regex": filter,
+                    "$options": "i"
                 }
             },
             {
                 username: {
-                    "$regex": filter
+                    "$regex": filter,
+                    "$options": "i"
                 }
             }
         ]
@@ -143,4 +168,4 @@ const searchUser = async (req, res) => {
     });
 }
 
-module.exports = {signUp, logIn, updateUser, searchUser};
+module.exports = {signUp, logIn, updateUser, searchUser, showUserData};
