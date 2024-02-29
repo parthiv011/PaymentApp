@@ -73,16 +73,16 @@ const logIn = async (req, res) => {
                 userId: user._id,
             }, secret);
 
-            res.json({
+            return res.json({
                 token: token,
             });
         }
 
-        res.status(411).json({
+        return res.status(411).json({
             msg: "Error while logging In!"
         })
     }catch (e) {
-        res.status(500).json({
+        return res.status(500).json({
             msg: "Internal Server Error!"
         });
         console.log(e);
@@ -91,7 +91,7 @@ const logIn = async (req, res) => {
 
 const showUserData = async (req, res) => {
     try {
-        const userData = await User.findOne({username: req.headers.username});
+        const userData = await User.findById(req.userId);
         if(userData){
             res.json({
                 userId: userData._id,

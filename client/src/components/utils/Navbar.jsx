@@ -5,8 +5,8 @@ import axios from "axios";
 export const Navbar = () => {
     const navigate = useNavigate();
 
-    return <nav className='relative'>
-        <div className='fixed top-0 w-full flex justify-between items-center bg-black p-5'>
+    return <nav className='relative z-10'>
+        <div className='fixed top-0 w-full flex justify-between items-center bg-black bg-opacity-75 p-5 backdrop-blur-sm shadow-xl'>
         <div onClick={() => navigate('/')}
              className='cursor-pointer'
         >
@@ -15,11 +15,11 @@ export const Navbar = () => {
         </div>
             <div className='flex items-center gap-x-3'>
             <button
-                className='text-white'
+                className='text-white hover:text-gray-300'
                 onClick={() => navigate('/signup')}
             >Signup</button>
             <button
-                className='text-white'
+                className='text-white hover:text-gray-300'
                 onClick={() => navigate('/login')}
             >Log In</button>
             </div>

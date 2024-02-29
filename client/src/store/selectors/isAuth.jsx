@@ -5,6 +5,10 @@ export const isAuthSelector = selector({
     key: 'isUserAuthenticated',
     get: ({get}) => {
         const user = get(userAtom);
-        return user.username !== '';
+        if(user.userId){
+            return true;
+        }else {
+            return false;
+        }
     }
 });

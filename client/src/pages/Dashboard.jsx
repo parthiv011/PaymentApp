@@ -1,14 +1,25 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Input} from "../components/ui/Input.jsx";
-import {Users} from "../components/Users.jsx";
+import {Users} from "../components/utils/Users.jsx";
+import {useRecoilValue} from "recoil";
+import {isAuthSelector} from "../store/selectors/isAuth.jsx";
+import {userAtom} from "../store/atoms/user.jsx";
+import {Balance} from "../components/utils/Balance.jsx";
 
 export const Dashboard = () => {
+    const isAuthenticated = useRecoilValue(isAuthSelector);
+    const user = useRecoilValue(userAtom);
+
     const token = localStorage.getItem("token");
     const [users, setUser] = useState([]);
     const [filter, setFilter] = useState("");
 
+
     useEffect(() => {
+        if(!isAuthenticated){
+            return;
+        }
         const fetchData = async ()  => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
@@ -20,20 +31,29 @@ export const Dashboard = () => {
             }
         }
         fetchData();
-    }, [filter])
+    }, [filter, is,token])
     return <main className='mt-24 px-3'>
-        <h1
-            className='font-bold'
-        >Welcome </h1>
-        <Input label={"Search User"} type={"text"} placeholder={"Enter user for transaction"} onChange={(e) => {
-            setFilter(e.target.value);
-        }} />
 
-        <div className='gap-3 flex'>
-            {users.map(user => (
-                <Users key={user._id} user={user} />
-            ))}
+        {isAuthenticated? (
+            <>
+                <h1 className='font-extrabold text-3xl'>Welcome, {user.firstName}</h1>
+                    <hr />
+                <Balance value={"3000"} />
+                <Input label={"Search User"}
+                       type={"text"}
+                       placeholder={"Enter user for transaction"}
+                       onChange={(e) => {
+                           setFilter(e.target.value);
+                       }} />
 
-        </div>
+                <div className='flex flex-wrap'>
+                    {users.map(user => (
+                        <Users key={user._id} user={user} />
+                    ))}
+                </div>
+            </>
+        ) : (
+            <p>Please Log In To get access to DashBoard!</p>
+        )}
     </main>
 }
