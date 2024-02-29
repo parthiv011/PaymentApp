@@ -9,6 +9,7 @@ import {Balance} from "../components/utils/Balance.jsx";
 
 export const Dashboard = () => {
     const isAuthenticated = useRecoilValue(isAuthSelector);
+    console.log(isAuthenticated)
     const user = useRecoilValue(userAtom);
 
     const token = localStorage.getItem("token");
@@ -31,8 +32,9 @@ export const Dashboard = () => {
             }
         }
         fetchData();
-    }, [filter, is,token])
-    return <main className='mt-24 px-3'>
+        console.log(isAuthenticated);
+    }, [filter, isAuthenticated, token])
+    return <main className='mt-24 px-3 bg-white h-screen'>
 
         {isAuthenticated? (
             <>
@@ -53,7 +55,8 @@ export const Dashboard = () => {
                 </div>
             </>
         ) : (
-            <p>Please Log In To get access to DashBoard!</p>
+            <p className='text-black'
+            >Please Log In To get access to DashBoard!</p>
         )}
     </main>
 }
