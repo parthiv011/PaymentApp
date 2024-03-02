@@ -6,7 +6,7 @@ const getBalance = async (req, res) => {
             userId: req.userId
         });
 
-        res.json({
+        return res.json({
             balance: account.balance
         });
     }catch (e){

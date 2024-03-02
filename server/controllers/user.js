@@ -43,7 +43,11 @@ const signUp = async (req, res) => {
 
         res.json({
             msg: "User Signed up successfully!",
-            token: token
+            token: token,
+            userId: user._id,
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName
         })
     } catch (e) {
         res.status(500).json({
@@ -75,6 +79,10 @@ const logIn = async (req, res) => {
 
             return res.json({
                 token: token,
+                userId: user._id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName
             });
         }
 

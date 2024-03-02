@@ -5,20 +5,20 @@ export const userAtom = atom({
     key: 'userAtom',
     default: {
         userId: '',
-        firstName: '',
-        lastName: '',
         username: '',
+        firstName: '',
+        lastName: ''
     },
     get: async () => {
         const user = {
             userId: '',
+            username: '',
             firstName: '',
-            lastName: '',
-            username:''
+            lastName: ''
         }
 
         const token = localStorage.getItem("token");
-
+        console.log(token);
         if(!token){
             return user;
         }
@@ -26,7 +26,7 @@ export const userAtom = atom({
         try{
             const getUserDetails = await axios.get('http://localhost:3000/api/v1/user/', {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                    Authorization: `${token}`,
                 }
             })
             user.userId = getUserDetails.data.userId;

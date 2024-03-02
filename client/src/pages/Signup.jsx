@@ -3,9 +3,13 @@ import {InfoHead} from "../components/ui/InfoHead.jsx";
 import {Input} from "../components/ui/Input.jsx";
 import {ButtonLink} from "../components/ui/ButtonLink.jsx";
 import {Button} from "../components/ui/Button.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {useRecoilValueLoadable, useSetRecoilState} from "recoil";
+import {userAtom} from "../store/atoms/user.jsx";
+import {isAuthSelector} from "../store/selectors/isAuth.jsx";
+import {balanceAtom} from "../store/atoms/balance.jsx";
 
 export const Signup = () => {
 
@@ -16,6 +20,16 @@ export const Signup = () => {
     const [username, setUsername] = useState("");
     const [password,setPassword] = useState("");
 
+    const setUser = useSetRecoilState(userAtom);
+    const isAuthenticated = useRecoilValueLoadable(isAuthSelector);
+    const setBalance = useSetRecoilState(balanceAtom);
+
+    useEffect(() => {
+        if(!isAuthenticated){
+            navigate('/dashboard');
+        }
+    }, [isAuthenticated]);
+
     const handleSignUp = async (e) => {
         e.preventDefault();
 
@@ -25,12 +39,27 @@ export const Signup = () => {
             firstName,
             lastName
         })
+        const token = await response.data.token;
+        const getBalance = await axios.get('http://localhost:3000/api/v1/account/balance', {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+
+        setUser({
+            userId: response.data.userId,
+            username: response.data.username,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+        });
+
+        setBalance(getBalance.data.balance);
 
         localStorage.setItem("token", `Bearer ${response.data.token}`);
         navigate('/dashboard');
     }
 
-    return <main className='h-screen flex justify-center'>
+    return <main className='h-screen flex justify-center bg-white'>
     <div className='flex flex-col justify-center'>
         <form onSubmit={handleSignUp}
             className='rounded-lg border-black border w-80 text-center p-2 h-max px-4'>

@@ -2,20 +2,20 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {Input} from "../components/ui/Input.jsx";
 import {Users} from "../components/utils/Users.jsx";
-import {useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue, useRecoilValueLoadable} from "recoil";
 import {isAuthSelector} from "../store/selectors/isAuth.jsx";
 import {userAtom} from "../store/atoms/user.jsx";
 import {Balance} from "../components/utils/Balance.jsx";
+import {balanceAtom} from "../store/atoms/balance.jsx";
 
 export const Dashboard = () => {
-    const isAuthenticated = useRecoilValue(isAuthSelector);
-    console.log(isAuthenticated)
-    const user = useRecoilValue(userAtom);
+    const balance = useRecoilValue(balanceAtom);
+    const isAuthenticated = useRecoilValueLoadable(isAuthSelector);
+    const [user, setCurrentUser] = useRecoilState(userAtom);
 
     const token = localStorage.getItem("token");
     const [users, setUser] = useState([]);
     const [filter, setFilter] = useState("");
-
 
     useEffect(() => {
         if(!isAuthenticated){
@@ -25,22 +25,20 @@ export const Dashboard = () => {
             try {
                 const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
                 const userData = setUser(response.data.user);
-                // const name = userData.firstName;
 
             }catch (e) {
                 console.error("Error Fetching the Data!", e);
             }
         }
         fetchData();
-        console.log(isAuthenticated);
-    }, [filter, isAuthenticated, token])
+    }, [filter, isAuthenticated])
     return <main className='mt-24 px-3 bg-white h-screen'>
 
         {isAuthenticated? (
             <>
                 <h1 className='font-extrabold text-3xl'>Welcome, {user.firstName}</h1>
                     <hr />
-                <Balance value={"3000"} />
+                <Balance value={balance.toFixed(2)} />
                 <Input label={"Search User"}
                        type={"text"}
                        placeholder={"Enter user for transaction"}
@@ -59,4 +57,4 @@ export const Dashboard = () => {
             >Please Log In To get access to DashBoard!</p>
         )}
     </main>
-}
+} 
