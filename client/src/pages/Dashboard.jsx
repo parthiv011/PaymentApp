@@ -11,32 +11,29 @@ import {balanceAtom} from "../store/atoms/balance.jsx";
 export const Dashboard = () => {
     const balance = useRecoilValue(balanceAtom);
     const isAuthenticated = useRecoilValueLoadable(isAuthSelector);
-    const [user, setCurrentUser] = useRecoilState(userAtom);
+    const [currUser, setCurrentUser] = useRecoilState(userAtom);
 
     const token = localStorage.getItem("token");
     const [users, setUser] = useState([]);
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        if(!isAuthenticated){
-            return;
-        }
         const fetchData = async ()  => {
             try {
+                if(!isAuthenticated) return;
                 const response = await axios.get(`http://localhost:3000/api/v1/user/bulk?filter=${filter}`);
-                const userData = setUser(response.data.user);
-
+                setUser(response.data.user);
             }catch (e) {
                 console.error("Error Fetching the Data!", e);
             }
         }
         fetchData();
-    }, [filter, isAuthenticated])
-    return <main className='mt-24 px-3 bg-white h-screen'>
+    }, [filter, isAuthenticated, currUser])
+    return <main className='mt-24 px-3 bg-white min-h-screen'>
 
         {isAuthenticated? (
             <>
-                <h1 className='font-extrabold text-3xl'>Welcome, {user.firstName}</h1>
+                <h1 className='font-extrabold text-3xl'>Welcome, {currUser.firstName}</h1>
                     <hr />
                 <Balance value={balance.toFixed(2)} />
                 <Input label={"Search User"}

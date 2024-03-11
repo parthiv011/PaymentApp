@@ -18,6 +18,7 @@ export const userAtom = atom({
         }
 
         const token = localStorage.getItem("token");
+
         console.log(token);
         if(!token){
             return user;

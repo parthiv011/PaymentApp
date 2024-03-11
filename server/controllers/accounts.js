@@ -64,4 +64,5 @@ const transferAmount = async (req, res) => {
     });
 };
 
+
 module.exports = { getBalance, transferAmount };

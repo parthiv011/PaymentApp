@@ -14,11 +14,12 @@ export const PayWindow = () => {
     const name = searchParams.get("name");
 
     const [success, setSuccess] = useState('');
+    const [error, setError] = useState('');
     const [amount, setAmount] = useState(0);
     const setBalance = useSetRecoilState(balanceAtom);
 
     const handleTransfer = async () => {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
         try{
             const response = await axios.post('http://localhost:3000/api/v1/account/transfer', {
                 to: userId,
@@ -35,6 +36,7 @@ export const PayWindow = () => {
         }
         catch (e) {
             console.error("Error Occurred in Transaction", e);
+            setError("Error occurred in transaction. Try again later!");
         }
     }
 
@@ -50,6 +52,7 @@ export const PayWindow = () => {
                    }}
             />
             <Button type={"submit"} title={"Send Money"} onClick={handleTransfer} />
+            {error && <p className="text-red-500">{error}</p>}
             <Heading title={success} />
         </div>
     </main>

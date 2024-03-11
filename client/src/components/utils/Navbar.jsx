@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const Navbar = () => {
     const navigate = useNavigate();
-
+    // const []
     return <nav className='relative z-10'>
         <div className='fixed top-0 w-full flex justify-between items-center bg-black bg-opacity-75 p-5 backdrop-blur-sm shadow-xl'>
         <div onClick={() => navigate('/')}
