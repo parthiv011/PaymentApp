@@ -1,6 +1,6 @@
 import {Input} from "../components/ui/Input.jsx";
 import {Button} from "../components/ui/Button.jsx";
-import {ProfileCard} from "../components/utils/ProfileCard.jsx";
+import {ProfileCard} from "../components/features/ProfileCard.jsx";
 import {useSearchParams} from "react-router-dom";
 import {useState} from "react";
 import axios from "axios";
@@ -26,7 +26,7 @@ export const PayWindow = () => {
                 amount:amount
             }, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `${token}`
                 }
             })
 

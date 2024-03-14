@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {Input} from "../components/ui/Input.jsx";
-import {Users} from "../components/utils/Users.jsx";
+import {Users} from "../components/features/Users.jsx";
 import {useRecoilState, useRecoilValue, useRecoilValueLoadable} from "recoil";
 import {isAuthSelector} from "../store/selectors/isAuth.jsx";
 import {userAtom} from "../store/atoms/user.jsx";
-import {Balance} from "../components/utils/Balance.jsx";
+import {Balance} from "../components/features/Balance.jsx";
 import {balanceAtom} from "../store/atoms/balance.jsx";
 
 export const Dashboard = () => {
@@ -31,7 +31,7 @@ export const Dashboard = () => {
     }, [filter, isAuthenticated, currUser])
     return <main className='mt-24 px-3 bg-white min-h-screen'>
 
-        {isAuthenticated? (
+        {isAuthenticated.state === 'hasValue' && isAuthenticated.contents? (
             <>
                 <h1 className='font-extrabold text-3xl'>Welcome, {currUser.firstName}</h1>
                     <hr />

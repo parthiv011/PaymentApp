@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {Signup} from "./pages/Signup.jsx";
 import {Login} from "./pages/Login.jsx";
 import {Dashboard} from "./pages/Dashboard.jsx";
-import {Navbar} from "./components/utils/Navbar.jsx";
+import {Navbar} from "./components/features/Navbar.jsx";
 import {Home} from "./pages/Home.jsx";
 import {PayWindow} from "./pages/PayWindow.jsx";
 

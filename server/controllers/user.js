@@ -34,7 +34,7 @@ const signUp = async (req, res) => {
         // Initializing the user Account
         await Account.create({
             userId,
-            balance: 1000 + Math.random() * 10000
+            balance: 1000 + Math.random() * 1000000,
         });
 
         const token = jwt.sign({
@@ -140,10 +140,8 @@ const updateUser = async (req, res) => {
     });
 }
 
-
 const searchUser = async (req, res) => {
     const filter = req.query.filter || "";
-
     const users = await User.find({
         $or: [{
             firstName: {
