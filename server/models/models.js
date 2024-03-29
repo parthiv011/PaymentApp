@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-
 const AccountSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -40,20 +39,20 @@ const AccountSchema = new mongoose.Schema({
     }
 });
 
-const TrasnsactionSchema = new mongoose.Schema({
-    userId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User'
-    },
-    from: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    to: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    }
-})
+// const TrasnsactionSchema = new mongoose.Schema({
+//     userId: {
+//             type: mongoose.Schema.Types.ObjectId,
+//             ref: 'User'
+//     },
+//     from: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User'
+//     },
+//     to: {
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref: 'User'
+//     }
+// })
 
 const User = mongoose.model('User', userSchema);
 const Account = mongoose.model('Accounts', AccountSchema);

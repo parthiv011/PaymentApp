@@ -52,8 +52,8 @@ export const PayWindow = () => {
                    }}
             />
             <Button type={"submit"} title={"Send Money"} onClick={handleTransfer} />
-            {error && <p className="text-red-500">{error}</p>}
-            <Heading title={success} />
+            {error && <p className="text-red-500 font-medium">{error}</p>}
+            <p className='font-medium text-green-700'>{success}</p>
         </div>
     </main>
 }

@@ -64,47 +64,47 @@ const transferAmount = async (req, res) => {
     });
 };
 
-const requestAmount = async (req, res) => {
-    const session = await mongoose.startSession();
+// const requestAmount = async (req, res) => {
+//     const session = await mongoose.startSession();
+//
+//     session.startTransaction();
+//
+//     const {from , amount} = req.body;
+//
+//     const requesterId = await Account.findOne({
+//         userId: req.userId
+//     }).session(session);
+//
+//     if(!requesterId){
+//         await session.abortTransaction();
+//         res.status(400).json({
+//             msg: "Requester is not valid!"
+//         });
+//     }
+//
+//     const requesteeId = await Account.findOne({
+//         userId: from
+//     }).session(session);
+//
+//     if(!requesteeId){
+//         await session.abortTransaction();
+//         res.status(400).json({
+//             msg: "Requested user is not valid!"
+//         });
+//     }
+//
+//     const notification = new Notification({
+//         userId: from,
+//         message: `User ${req.userId} requested ${amount} from you!`,
+//         type: 'request'
+//     })
+//
+//     await notification.save();
+//
+//     await session.commitTransaction();
+//     res.json({
+//         msg: "Request Amount success!"
+//     });
+// }
 
-    session.startTransaction();
-
-    const {from , amount} = req.body;
-
-    const requesterId = await Account.findOne({
-        userId: req.userId
-    }).session(session);
-
-    if(!requesterId){
-        await session.abortTransaction();
-        res.status(400).json({
-            msg: "Requester is not valid!"
-        });
-    }
-
-    const requesteeId = await Account.findOne({
-        userId: from
-    }).session(session);
-
-    if(!requesteeId){
-        await session.abortTransaction();
-        res.status(400).json({
-            msg: "Requested user is not valid!"
-        });
-    }
-
-    const notification = new Notification({
-        userId: from,
-        message: `User ${req.userId} requested ${amount} from you!`,
-        type: 'request'
-    })
-
-    await notification.save();
-
-    await session.commitTransaction();
-    res.json({
-        msg: "Request Amount success!"
-    });
-}
-
-module.exports = { getBalance, transferAmount, requestAmount };
+module.exports = { getBalance, transferAmount };

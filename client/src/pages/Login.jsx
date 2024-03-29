@@ -6,7 +6,7 @@ import {ButtonLink} from "../components/ui/ButtonLink.jsx";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {useRecoilState, useRecoilValueLoadable, useSetRecoilState} from "recoil";
+import {useRecoilValueLoadable, useSetRecoilState} from "recoil";
 import {userAtom} from "../store/atoms/user.jsx";
 import {isAuthSelector} from "../store/selectors/isAuth.jsx";
 import {balanceAtom} from "../store/atoms/balance.jsx";
