@@ -40,8 +40,6 @@ export const Login = () => {
       });
 
       const token = await response.data.token;
-      console.log(response);
-
       const getBalance = await axios.get(`${BACKEND_URL}account/balance`, {
         headers: {
           Authorization: `Bearer ${token}`,
